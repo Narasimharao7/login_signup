@@ -1,30 +1,37 @@
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import authRoutes from "./routes/authRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
-const authRoutes = require("./routes/authRoutes");
+dotenv.config();
 
 const app = express();
 
-/* ✅ MUST BE BEFORE ROUTES */
+/* ✅ CORS CONFIG — MUST BE AT TOP */
 app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://login-signup-frontend.onrender.com",
+      "https://login-signup-hazel-one.vercel.app",
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   }),
 );
 
+/* ✅ Handle Preflight */
+app.options("*", cors());
+
 app.use(express.json());
 
+/* ✅ ROUTES */
 app.use("/api/auth", authRoutes);
+app.use("/api/user", userRoutes);
 
+/* ✅ HEALTH CHECK */
 app.get("/", (req, res) => {
-  res.send("Backend is running");
+  res.send("Backend is running 🚀");
 });
 
 const PORT = process.env.PORT || 5000;

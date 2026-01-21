@@ -1,46 +1,46 @@
-const pool = require("../db");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import User from "../models/User.js";
 
-exports.signup = async (req, res) => {
+export const signup = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
+    const existingUser = await User.findOne({ email });
+    if (existingUser)
+      return res.status(400).json({ message: "User already exists" });
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    await pool.query(
-      "INSERT INTO users (name, email, password) VALUES ($1,$2,$3)",
-      [name, email, hashedPassword],
-    );
+    const user = await User.create({
+      name,
+      email,
+      password: hashedPassword,
+    });
 
     res.status(201).json({ message: "Signup successful" });
   } catch (error) {
-    console.error("Signup error:", error.message);
-    res.status(500).json({ message: "Signup failed" });
+    res.status(500).json({ message: error.message });
   }
 };
 
-exports.login = async (req, res) => {
-  const { email, password } = req.body;
+export const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
 
-  const result = await pool.query("SELECT * FROM users WHERE email=$1", [
-    email,
-  ]);
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ message: "User not found" });
 
-  if (result.rows.length === 0) {
-    return res.status(400).json({ message: "Invalid credentials" });
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch)
+      return res.status(401).json({ message: "Invalid credentials" });
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "1d",
+    });
+
+    res.json({ token, user: { id: user._id, email: user.email } });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
-
-  const user = result.rows[0];
-  const isMatch = await bcrypt.compare(password, user.password);
-
-  if (!isMatch) {
-    return res.status(400).json({ message: "Invalid credentials" });
-  }
-
-  const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-    expiresIn: "1d",
-  });
-
-  res.json({ token });
 };
