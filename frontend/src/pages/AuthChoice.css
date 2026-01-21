@@ -1,0 +1,70 @@
+/* Page layout */
+.auth-container {
+  height: 100vh;
+  background: linear-gradient(135deg, #1d2671, #c33764);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+/* Card */
+.auth-card {
+  background: #ffffff;
+  padding: 40px 35px;
+  width: 360px;
+  border-radius: 14px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+/* Text */
+.auth-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #111827;
+}
+
+.auth-subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 30px;
+}
+
+/* Buttons */
+.auth-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.btn {
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* Login button */
+.btn-login {
+  background: #2563eb;
+  color: white;
+}
+
+.btn-login:hover {
+  background: #1e40af;
+}
+
+/* Signup button */
+.btn-signup {
+  background: #10b981;
+  color: white;
+}
+
+.btn-signup:hover {
+  background: #047857;
+}
