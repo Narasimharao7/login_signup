@@ -1,4 +1,5 @@
 import api from "../api";
+import "../App.css";
 
 export default function Signup() {
   const submit = async (e) => {
@@ -11,17 +12,48 @@ export default function Signup() {
       password: form.password.value,
     });
 
-    alert("Signup successful");
     window.location.href = "/login";
   };
 
   return (
-    <form onSubmit={submit}>
-      <h2>Signup</h2>
-      <input name="name" placeholder="Name" required />
-      <input name="email" placeholder="Email" required />
-      <input name="password" type="password" placeholder="Password" required />
-      <button>Signup</button>
-    </form>
+    <div className="auth-container">
+      <div className="auth-card">
+        <h1 className="auth-title">Create Account</h1>
+        <p className="auth-subtitle">
+          Join us and manage your dashboard securely
+        </p>
+
+        <form onSubmit={submit}>
+          <input
+            className="auth-input"
+            name="name"
+            placeholder="Full Name"
+            required
+          />
+
+          <input
+            className="auth-input"
+            name="email"
+            type="email"
+            placeholder="Email Address"
+            required
+          />
+
+          <input
+            className="auth-input"
+            name="password"
+            type="password"
+            placeholder="Password"
+            required
+          />
+
+          <button className="auth-button btn-secondary">Create Account</button>
+        </form>
+
+        <a href="/login" className="auth-link">
+          Already have an account? Login
+        </a>
+      </div>
+    </div>
   );
 }

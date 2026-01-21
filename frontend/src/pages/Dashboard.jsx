@@ -15,16 +15,12 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div>
-      <h1>{data}</h1>
-      <button
-        onClick={() => {
-          localStorage.clear();
-          window.location.href = "/login";
-        }}
-      >
-        Logout
-      </button>
+    <div className="dashboard-container">
+      <div className="dashboard-card">
+        <h1 className="dashboard-title">Dashboard</h1>
+        <p className="dashboard-text">Welcome to your account</p>
+        <button className="auth-button logout-btn">Logout</button>
+      </div>
     </div>
   );
 }
