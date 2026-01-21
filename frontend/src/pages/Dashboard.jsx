@@ -1,26 +1,25 @@
 import { useEffect, useState } from "react";
-import api from "../api";
+import API from "../api";
 
-export default function Dashboard() {
-  const [data, setData] = useState("");
+const Dashboard = () => {
+  const [msg, setMsg] = useState("");
 
   useEffect(() => {
-    api
-      .get("/auth/dashboard")
-      .then((res) => setData(res.data.message))
-      .catch(() => {
-        localStorage.clear();
-        window.location.href = "/login";
-      });
+    API.get("/api/user/dashboard", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then((res) => setMsg(res.data.message))
+      .catch(() => setMsg("Unauthorized"));
   }, []);
 
   return (
-    <div className="dashboard-container">
-      <div className="dashboard-card">
-        <h1 className="dashboard-title">Dashboard</h1>
-        <p className="dashboard-text">Welcome to your account</p>
-        <button className="auth-button logout-btn">Logout</button>
-      </div>
+    <div className="dashboard">
+      <h1>{msg}</h1>
+      <p>You are logged in successfully 🎉</p>
     </div>
   );
-}
+};
+
+export default Dashboard;

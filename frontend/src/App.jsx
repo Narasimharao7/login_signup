@@ -1,19 +1,30 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AuthChoice from "./pages/AuthChoice";
-import Signup from "./pages/Signup";
+import { Routes, Route } from "react-router-dom";
+import AuthChoice from "./components/AuthChoice";
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
-import "./App.css";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Navbar from "./components/Navbar";
 
-export default function App() {
+const App = () => {
   return (
-    <BrowserRouter>
+    <>
+      <Navbar />
       <Routes>
         <Route path="/" element={<AuthChoice />} />
-        <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
-    </BrowserRouter>
+    </>
   );
-}
+};
+
+export default App;

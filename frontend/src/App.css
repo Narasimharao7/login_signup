@@ -1,202 +1,47 @@
-/* =========================
-   GLOBAL
-========================= */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
-  font-family:
-    "Inter",
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    sans-serif;
-  background: radial-gradient(circle at top, #1e293b, #020617);
-  color: #0f172a;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(120deg, #667eea, #764ba2);
 }
 
-/* =========================
-   AUTH LAYOUT
-========================= */
 .auth-container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* =========================
-   GLASS CARD
-========================= */
-.auth-card {
-  width: 380px;
-  padding: 40px 34px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(12px);
-  box-shadow:
-    0 30px 60px rgba(0, 0, 0, 0.35),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  animation: slideUp 0.7s ease;
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(25px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* =========================
-   HEADINGS
-========================= */
-.auth-title {
-  font-size: 28px;
-  font-weight: 800;
-  text-align: center;
-  color: #020617;
-  margin-bottom: 6px;
-}
-
-.auth-subtitle {
-  font-size: 14px;
-  text-align: center;
-  color: #475569;
-  margin-bottom: 30px;
-}
-
-/* =========================
-   INPUTS (PREMIUM)
-========================= */
-.auth-input {
-  width: 100%;
-  padding: 14px 16px;
-  margin-bottom: 16px;
+  width: 350px;
+  margin: 80px auto;
+  background: white;
+  padding: 30px;
   border-radius: 10px;
-  border: 1px solid #cbd5f5;
-  background: #f8fafc;
-  font-size: 14px;
-  transition: all 0.25s ease;
+  text-align: center;
 }
 
-.auth-input::placeholder {
-  color: #94a3b8;
-}
-
-.auth-input:focus {
-  outline: none;
-  border-color: #6366f1;
-  background: #ffffff;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
-}
-
-/* =========================
-   BUTTONS (SaaS)
-========================= */
-.auth-button {
+.auth-container input {
   width: 100%;
-  padding: 14px;
-  font-size: 15px;
-  font-weight: 700;
-  border-radius: 10px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.auth-container button {
+  width: 100%;
+  padding: 10px;
+  background: #667eea;
+  color: white;
   border: none;
   cursor: pointer;
-  transition: all 0.25s ease;
 }
 
-/* Primary */
-.btn-primary {
-  background: linear-gradient(135deg, #6366f1, #4f46e5);
-  color: white;
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(79, 70, 229, 0.45);
-}
-
-/* Secondary */
-.btn-secondary {
-  background: linear-gradient(135deg, #10b981, #059669);
-  color: white;
-}
-
-.btn-secondary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(5, 150, 105, 0.45);
-}
-
-/* =========================
-   LINKS
-========================= */
-.auth-link {
-  display: block;
-  margin-top: 18px;
-  font-size: 13px;
-  text-align: center;
-  color: #4f46e5;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.auth-link:hover {
-  text-decoration: underline;
-}
-
-/* =========================
-   DASHBOARD
-========================= */
-.dashboard-container {
-  min-height: 100vh;
-  background: #020617;
+.btn-group {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  gap: 10px;
 }
 
-.dashboard-card {
-  background: #ffffff;
-  width: 420px;
-  padding: 44px;
-  border-radius: 18px;
-  text-align: center;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+.outline {
+  background: white;
+  color: #667eea;
+  border: 1px solid #667eea;
 }
 
-.dashboard-title {
-  font-size: 26px;
-  font-weight: 800;
-  margin-bottom: 10px;
-}
-
-.dashboard-text {
-  font-size: 14px;
-  color: #475569;
-  margin-bottom: 30px;
-}
-
-.logout-btn {
-  background: linear-gradient(135deg, #ef4444, #b91c1c);
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 30px;
+  background: #222;
   color: white;
-}
-
-.logout-btn:hover {
-  box-shadow: 0 14px 30px rgba(239, 68, 68, 0.45);
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-@media (max-width: 420px) {
-  .auth-card,
-  .dashboard-card {
-    width: 92%;
-  }
 }

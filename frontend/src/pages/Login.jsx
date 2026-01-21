@@ -1,50 +1,36 @@
-import api from "../api";
-import "../App.css";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import API from "../api";
+import "./App.css";
 
-export default function Login() {
-  const submit = async (e) => {
+const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const form = e.target;
-
-    const res = await api.post("/auth/login", {
-      email: form.email.value,
-      password: form.password.value,
-    });
-
-    localStorage.setItem("token", res.data.token);
-    window.location.href = "/dashboard";
+    try {
+      const res = await API.post("/api/auth/login", { email, password });
+      localStorage.setItem("token", res.data.token);
+      navigate("/dashboard");
+    } catch (err) {
+      alert(err.response?.data?.message || "Login failed");
+    }
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-card">
-        <h1 className="auth-title">Welcome Back</h1>
-        <p className="auth-subtitle">Login to access your secure dashboard</p>
-
-        <form onSubmit={submit}>
-          <input
-            className="auth-input"
-            name="email"
-            type="email"
-            placeholder="Email Address"
-            required
-          />
-
-          <input
-            className="auth-input"
-            name="password"
-            type="password"
-            placeholder="Password"
-            required
-          />
-
-          <button className="auth-button btn-primary">Login</button>
-        </form>
-
-        <a href="/signup" className="auth-link">
-          Don’t have an account? Sign up
-        </a>
-      </div>
-    </div>
+    <form className="auth-container" onSubmit={handleLogin}>
+      <h2>Login</h2>
+      <input placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+      <input
+        type="password"
+        placeholder="Password"
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button>Login</button>
+    </form>
   );
-}
+};
+
+export default Login;
