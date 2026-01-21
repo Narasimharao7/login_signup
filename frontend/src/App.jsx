@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import AuthChoice from "./components/AuthChoice";
+// import AuthChoice from "./components/AuthChoice";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
