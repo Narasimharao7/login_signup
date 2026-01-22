@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import sequelize from "../config/db.js"; // See config below
+import sequelize from "../config/db.js";
 
 const User = sequelize.define(
   "User",
@@ -25,7 +25,7 @@ const User = sequelize.define(
   },
   {
     tableName: "users",
-    timestamps: true,
+    timestamps: true, // ✅ Sequelize auto-manages createdAt & updatedAt
   },
 );
 
